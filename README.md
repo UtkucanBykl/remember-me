@@ -15,8 +15,3 @@ python remember.py # this command call the notification with random words which 
 ```
 
 You can use with crontab.
-
-### Roadmap
-
-- Added priority for words.
-
