@@ -10,7 +10,7 @@ with notifications on OS.
 
 ```bash
 pip install -r req.txt
-python recorder.py --key book --name --message this-is-a-message kitap # this command will create notification which is you wants to remember
+python recorder.py --key book --name kitap --message this-is-a-message kitap # this command will create notification which is you wants to remember
 python remember.py # this command call the notification with random words which is created before by you
 ```
 
