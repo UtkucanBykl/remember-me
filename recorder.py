@@ -4,7 +4,7 @@ import argparse
 
 
 class IRe:
-    def __init__(self, recorder_format='json', save_path='.', file_name='remember'):
+    def __init__(self, recorder_format='json', save_path='/Users/utkucanbiyikli/Desktop/remember-me', file_name='remember'):
         self._recorder_format = recorder_format
         self._save_path = save_path
         self._file_name = f'{file_name}.{recorder_format}'
@@ -31,9 +31,9 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument('--key', required=True)
     parser.add_argument('--value', required=True)
+    parser.add_argument('--message', required=True)
     args = parser.parse_args()
-    message = f'{args.key} -> {args.value}'
     recorder = Recorder()
     recorder.save({
-        'message': message, 'title': 'Learn English', 'subtitle': args.key
+        'message': args.message, 'title': args.key, 'subtitle': args.value
     })

@@ -1,3 +1,4 @@
+import os
 import random
 import json
 from abc import ABC, abstractmethod
@@ -19,8 +20,14 @@ class JSONFormat(Format):
     def __init__(self, path):
         self._path = path
 
+    def control_file(self):
+        if not os.path.exists(self._path):
+            with open(self._path, 'w'):
+                return True
+
     def parse(self, value):
-        with open(self._path) as f:
+        self.control_file()
+        with open(self._path, 'r+') as f:
             try:
                 json_data = json.load(f)
             except:
