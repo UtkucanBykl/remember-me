@@ -1,14 +1,29 @@
 from recorder import IRe
 import subprocess as sp
-
+import os
 
 class Remember(IRe):
+    def __init__(self, **kwargs):
+        super().__init__(**kwargs)
+
+    @property
+    def running(self) -> bool:
+        return os.environ.get('REMEMBER_ME')
+
+    @running.setter
+    def running(self, value):
+        if isinstance(value, bool):
+            os.environ['REMEMBER_ME'] = str(value)
+
     def get_random(self):
         format = self.get_format()
         data = format.random()
         return data
 
     def remember(self):
+        print(self.running)
+        if self.running == 'False' or not self.running:
+            return
         data = self.get_random()
         message = data.get('message')
         title = data.get('title')

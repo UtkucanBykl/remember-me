@@ -12,7 +12,11 @@ class Format(ABC):
         pass
 
     @abstractmethod
-    def random(self):
+    def random(self) -> dict:
+        pass
+
+    @abstractmethod
+    def save(self) -> bool:
         pass
 
 
@@ -20,9 +24,9 @@ class JSONFormat(Format):
     def __init__(self, path):
         self._path = path
 
-    def control_file(self):
+    def control_file(self) -> bool:
         if not os.path.exists(self._path):
-            with open(self._path, 'w'):
+            with open(self._path, 'w+'):
                 return True
 
     def parse(self, value):
@@ -37,10 +41,21 @@ class JSONFormat(Format):
             json_data['data'] = array_data
         return json.dumps(json_data)
 
-    def random(self):
-        with open(self._path) as f:
+    def random(self) -> dict:
+        self.control_file()
+        with open(self._path, 'r+') as f:
             try:
                 json_data = json.load(f)
             except:
                 json_data = json.loads('{}')
         return random.choice(json_data.get('data', [{}]))
+
+    def save(self, value):
+        with open(self._path, 'w') as f:
+            try:
+                f.write(value)
+                return True
+            except BaseException as e:
+                print(e)
+                return False        
+
