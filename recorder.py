@@ -4,7 +4,7 @@ import argparse
 
 
 class IRe:
-    def __init__(self, recorder_format='json', save_path='/Users/utkucanbiyikli/Desktop/remember-me', file_name='remember'):
+    def __init__(self, recorder_format='json', save_path='/Users/utkucanbiyikli/Desktop/Projects/remember-me', file_name='remember'):
         self._recorder_format = recorder_format
         self._save_path = save_path
         self._file_name = f'{file_name}.{recorder_format}'
@@ -18,13 +18,7 @@ class Recorder(IRe):
     def save(self, value) -> bool:
         format = self.get_format()
         obj = format.parse(value)
-        with open(f'{self._save_path}/{self._file_name}', 'w') as f:
-            try:
-                f.write(obj)
-                return True
-            except BaseException as e:
-                print(e)
-                return False
+        return format.save(obj)
 
 
 if __name__ == "__main__":
