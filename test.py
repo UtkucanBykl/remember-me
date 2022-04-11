@@ -9,10 +9,7 @@ class Test(unittest.TestCase):
         self.recorder = Recorder()
 
     def test_write_to_recorder(self):
-        data = {
-            "message": "asdadsa",
-            "title": "dsfsfds"
-        }
+        data = {"message": "asdadsa", "title": "dsfsfds"}
 
         self.assertTrue(self.recorder.save(data))
 
@@ -20,5 +17,5 @@ class Test(unittest.TestCase):
         self.remember.remember()
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     unittest.main()
